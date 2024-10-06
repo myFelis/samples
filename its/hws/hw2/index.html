@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Опросник для владельцев животных</title>
+</head>
+<body>
+
+<header>
+    <img src="logo.svg" width="200" height="120" alt="Logo">Logo
+    
+    <nav>
+        <ul>
+            <li><a href="#">My Stories</a></li>
+            <li><a href="#">Family Cards</a></li>
+            <li><a href="#">Best Howto</a></li>
+            <li><a href="#">Portfolio</a></li>
+            <li><a href="#">Contacts</a></li>
+        </ul>
+    </nav>
+</header>
+
+
+<main>
+<section>
+    <h1>Опросник для владельцев животных</h1>
+    <div>
+        <h3><i>Пожалуйста, заполните форму</i></h3>
+    </div>
+    <div>
+    <form class="form" method="POST">
+        <fieldset class="form__pet-info">
+          <legend class="form__pet-info_legend">Информация о питомце</legend>
+            <label for="pet-name">Кличка животного:</label>
+            <input type="text" id="pet-name" name="pet-name" required>
+            <br/>
+            <label for="pet-type">Вид животного:</label>
+            <select id="pet-type" name="pet-type" required>
+              <option value="">Выберите</option>
+              <option value="dog">Собака</option>
+              <option value="cat">Кошка</option>
+              <option value="bird">Птица</option>
+              <option value="fish">Рыба</option>
+              <option value="other">Другое</option>
+            </select>
+            <br/>
+            <label>Питание животного:</label>
+            <input type="checkbox" id="pet-food-raw" name="pet-food" value="raw" required multiple>
+            <label for="pet-food-raw">Влажный корм</label>
+            <input type="checkbox" id="pet-food-dry" name="pet-food" value="dry" required multiple>
+            <label for="pet-food-dry">Сухой корм</label>
+            <input type="checkbox" id="pet-food-natural" name="pet-food" value="natural" required multiple>
+            <label for="pet-food-natural">Натуральный корм</label>
+            <br/>
+            <br/>
+
+            <label for="pet-age">Возраст:</label>
+            <input type="number" id="pet-age" name="pet-age" min="0" max="100" required>
+            <br/>
+
+            <label for="pet-breed">Порода (если применимо):</label>
+            <input type="text" id="pet-breed" name="pet-breed">
+            <br/>
+
+            <label>Пол:</label>
+            <input type="radio" id="pet-gender-male" name="pet-gender" value="male" required>
+            <label for="pet-gender-male">Мужской</label>
+            <input type="radio" id="pet-gender-female" name="pet-gender" value="female" required>
+            <label for="pet-gender-female">Женский</label>
+            <br/>
+
+            <label for="pet-avatar">Загрузить фото питомца</label>
+
+            <input type="file" id="pet-avatar" name="pet-avatar" accept="image/png, image/jpeg" />
+
+            <br/>
+
+        </fieldset>
+
+        <fieldset class="form__owner-info">
+            <legend class="form__owner-info_legend">Контакты</legend>
+            <label for="owner-name">Имя владельца:</label>
+            <input type="text" id="owner-name" name="owner-name" required>
+            <br/>
+
+            <label for="owner-email">Адрес электронной почты:</label>
+            <input type="email" id="owner-email" name="owner-email" required>
+            <br/>
+
+            <label for="owner-phone">Номер телефона:</label>
+            <input type="tel" id="owner-phone" name="owner-phone" placeholder="+7 (xхx) xxx-xx-xx" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+            <br/>
+        </fieldset>
+        <div>
+          <br/>
+          <label for="pet-comment">Комментарий:</label>
+          <textarea id="pet-comment" name="pet-comment" rows="5" cols="33"></textarea>
+          <br/>
+        </div>
+
+        <div>
+          <br/>
+          <input type="reset" value="Очистить">
+          <input type="submit" value="Отправить">
+        </div>
+    </form>
+    </div>
+</section>
+
+<section>
+    <div>
+    <br>
+    <p><b>#itgirlschool</b></p>
+    <a href="https://itgirlschool.com/" target="_blank">Our super-cool school!</a>
+    </div>
+</section>
+
+<aside>
+    <h3>News</h3>
+    <p>About...</p>
+</aside>
+
+</main>
+
+<footer>
+    
+    <nav>
+        <ul>
+            <li><a href="#">My Stories</a></li>
+            <li><a href="#">Best Howto</a></li>
+            <li><a href="#">Portfolio</a></li>
+            <li><a href="#">Contacts</a></li>
+            
+        </ul>
+    </nav>
+
+    <p><a href="#">Subscribe</a></p>
+
+    <address>
+        <p>By e-mail: <a href="mailto:someone@example.com">someone@example.com</a></p>
+        <p>By phone: <a href="tel:+3741111111">+3741111111</a></p>
+    </address>
+
+    <img src="logo.svg" width="200" height="120" alt="Logo">Logo
+    <p>My awesome pages with stories and projects</p>
+    <p>Copyrights &copy; baOOcoba 2024</p>
+
+
+</footer>
+
+</body>
+</html>
