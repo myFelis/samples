@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+
+    <meta charset="UTF-8" name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="icon" href="star.svg" sizes="32x32">
+    <link rel="icon" href="star.png">
+    <link rel="icon" type="image/svg+xml" href="<%=
+      require('./star.svg').default
+    %>">
+
+    <title>Тот самый замечательный блог</title>
+    <style>
+    @keyframes myAnimation {
+      0% { opacity: 0; }
+      50% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    .element {
+      animation: myAnimation 5s infinite;
+    }
+  </style>
+</head>
+<body style="background-color: rgba(120,160,200,0.5);">
+
+<header style="background-color: #00000011 ;">
+
+    
+    <nav>
+        <ul style="display: flex; list-style: none; margin: 0; padding: 5px;">
+            <li style="margin-right: 10px;"><img src="logo.svg" width="20" height="20" alt="Logo"></li>
+            <li style="margin-right: 5px;"><a href="#">Best Practices</a></li>
+            <li style="margin-right: 5px;"><a href="#">Portfolio</a></li>
+            <li><a href="#">Contacts</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main style="background-color: #00000018;">
+    <h1>Best Practices</h1>
+    <section>
+        <div>
+            <h3><i>Part 1</i></h3>
+            <p>
+                <img src="star.svg" width="40" height="40" alt="Logo">
+            </p>
+            <h3>Opacity</h3>
+            <link rel="icon" href="star.png" type="image/png">
+            <div class="element">Animated sample "element"...</div>
+        </div>
+        <div>
+
+            <div class="element">
+                <img src="images/part1_1.jpg" width="400" height="200" alt="Part 1">
+            </div>
+            <p>Opacity sample (in 5 sec)</p>
+
+        </div>
+    </section>
+    <section>
+
+        <div>
+            <h3><i>Part 2</i></h3>
+            <p>
+                <img src="star.svg" width="40" height="40" alt="Logo">
+            </p>
+        </div>
+        <div>
+            <h3>Filters</h3>
+            <h4>Image filter grayscale sample</h4>
+            <img src="images/part1_2.jpg" width="400" height="200" alt="Part 2">
+            <img style="filter: grayscale(100%)" src="images/part1_2.jpg" width="400" height="200" alt="Part 2">
+            <p><b>Note</b> filter is not available for Internet Explorer, Edge 12, Safari <= 5.1.</p>
+
+            <h4>Image filter shadow sample</h4>
+            <img src="images/part1_3.jpg" width="400" height="200" alt="Part 2">
+            <img style="filter: drop-shadow(8px 8px 10px black)" src="images/part1_3.jpg" width="400" height="200" alt="Part 2">
+            <p><b>Note</b> filter is not available for Internet Explorer, Edge 12, Safari <= 5.1.</p>
+
+            <h4>Image filter blur sample</h4>
+            <img src="images/part1_3.jpg" width="400" height="200" alt="Part 2">
+            <img style="filter: blur(3px)" src="images/part1_3.jpg" width="400" height="200" alt="Part 2">
+            <p><b>Note</b> filter is not available for Internet Explorer, Edge 12, Safari <= 5.1.</p>
+       </div>
+    </section>
+
+    <section>
+
+        <div>
+            <h3><i>Part 3</i></h3>
+            <p>
+                <img src="star.svg" width="40" height="40" alt="Logo">
+            </p>
+        </div>
+        <div>
+            <p>Gif animation</p>
+            <h3>Animated Image gif sample</h3>
+            <img src="https://media.giphy.com/media/3o6UBpHgaXFDNAuttm/giphy.gif" width="400" height="200" alt="Part 2">
+            <p>Good content</p>
+            <h4>And a small piece of beauty</h4>
+            <iframe width="35%" allowfullscreen src="video/135658-764361528_small.mp4"></iframe>
+        </div>
+        <p>
+            <img src="star.svg" width="40" height="40" alt="Logo">
+        </p>
+    </section>
+
+    <section>
+        <div>
+        <br>
+        <p><b>#itgirlschool</b></p>
+        <a href="https://itgirlschool.com/" target="_blank">Our super-cool school!</a>
+        </div>
+    </section>
+
+    <aside>
+        <h3>News</h3>
+        <div class="element">About...</div>
+        <p>Intro video</p>
+        <video muted controls height="300" width="300">
+             <source src="video/hello_friend.mp4" type="video/mp4">
+        </video>
+    </aside>`
+
+</main>
+
+<footer>
+    
+    <nav>
+        <ul>
+            <li><a href="#">Best Practices</a></li>
+            <li><a href="#">Portfolio</a></li>
+            <li><a href="#">Contacts</a></li>
+            
+        </ul>
+    </nav>
+
+    <p><a href="#">Subscribe</a></p>
+
+    <address>
+        <p>By e-mail: <a href="mailto:someone@example.com">someone@example.com</a></p>
+        <p>By phone: <a href="tel:+3741111111">+3741111111</a></p>
+    </address>
+
+    <img src="logo.svg" width="200" height="120" alt="Logo">
+    <p>My awesome pages with stories and projects</p>
+    <p>Copyrights &copy; baOOcoba 2024</p>
+
+
+</footer>
+
+</body>
+</html>
