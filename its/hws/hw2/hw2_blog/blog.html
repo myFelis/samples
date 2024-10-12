@@ -3,11 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Тот самый замечательный блог</title>
+    <style>
+    @keyframes myAnimation {
+      0% { opacity: 0; }
+      50% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    .element {
+      animation: myAnimation 5s infinite;
+    }
+  </style>
 </head>
 <body style="background-color: rgba(120,160,200,0.5);">
 
 <header style="background-color: #00000011 ;">
-    <img src="logo.svg" width="200" height="120" alt="Logo">Logo
+    <img src="logo.svg" width="200" height="120" alt="Logo">
     
     <nav>
         <ul>
@@ -23,10 +34,14 @@
     <h1>О полезных практиках</h1>
     <div>
         <h3><i>Часть первая</i></h3>
+        <link rel="icon" href="star.png" type="image/png">
+        <div class="element">Пример элемента с анимацией...</div>
     </div>
     <div>
         <p>И начинается описание здесь</p>
-        <img src="images/part_1.png" width="800" height="400" alt="Part 1">Часть 1
+        <div class="element">
+            <img src="images/part_1.png" width="400" height="200" alt="Part 1">
+        </div>
         <p>Полезные цитаты из источников</p>
 
     </div>
@@ -39,7 +54,8 @@
     </div>
     <div>
         <p>И начинается еще описание здесь</p>
-        <img src="images/part_2.png" width="800" height="400" alt="Part 2">Часть 2
+        <h1>Animated Image svg sample</h1>
+        <img src="https://media.giphy.com/media/3o6UBpHgaXFDNAuttm/giphy.gif" width="400" height="200" alt="Part 2">
         <p>Полезные цитаты из других источников</p>
         <p>И закатное море</p>
         <iframe width="35%" allowfullscreen src="video/135658-764361528_small.mp4"></iframe>
@@ -56,7 +72,7 @@
 
 <aside>
     <h3>News</h3>
-    <p>About...</p>
+    <div class="element">About...</div>
     <p>Intro video</p>
     <video muted controls height="300" width="300">
          <source src="video/hello_friend.mp4" type="video/mp4">
@@ -84,7 +100,7 @@
         <p>By phone: <a href="tel:+3741111111">+3741111111</a></p>
     </address>
 
-    <img src="logo.svg" width="200" height="120" alt="Logo">Logo
+    <img src="logo.svg" width="200" height="120" alt="Logo">
     <p>My awesome pages with stories and projects</p>
     <p>Copyrights &copy; baOOcoba 2024</p>
 
