@@ -1,0 +1,139 @@
+@font-face {
+    src: url(../assets/fonts/new_font); /* Свойство src содержит путь к файлу шрифта */
+}
+
+@font-face {
+    src: url(../assets/fonts/new_font);
+    font-family: 'LT Funk';
+}
+@font-face {
+    src: url(../assets/fonts/new_font);
+    font-family: 'LT Funk';
+    font-style: italic;
+}
+@font-face {
+    src: url(../assets/fonts/new_font);
+    font-family: 'LT Funk';
+    font-weight: bold;
+}
+
+/*@font-face {*/
+/*    src: url(../assets/fonts/new_font.woff2) format('woff2'),*/
+/*         url(../assets/fonts/new_font.woff) format('woff');*/
+/*}*/
+
+h2 { /* селектор */
+    font-size: 22px; /* font-size - свойство, 22px - значение свойства */
+    color: mediumseagreen;
+}
+
+
+/* ссылка с классом my-link */
+a.my-link {
+    color: mediumseagreen;
+}
+
+/* элемент с классами my-button и my-input одновременно */
+.my-button .my-input {
+    color: mediumseagreen;
+}
+
+/* все ссылки, по которым пользователь не кликал, будут зелёные */
+a:link {
+    color: green;
+}
+
+/* ссылки, по которым пользователь переходил, сделаем серыми */
+a:visited {
+    color: gray;
+}
+
+/* ссылка, на которую пользователь навёл курсор, сменит цвет на синей */
+a:hover {
+    color: darkslategrey;
+}
+
+/* в момент клика ссылка станет красной */
+a:active {
+    color: darkseagreen;
+}
+
+/* выберет все ссылки, по которым пользователь ещё не переходил */
+
+a:not(:visited) {
+    color: green;
+}
+
+
+#socials
+{
+    margin-right: 2px;
+    float: right;
+}
+
+.social-nt
+{
+    color: #E3FFF2;
+    margin-right: 2px;
+}
+
+
+.wrapper {
+  display: flex;
+  flex-flow: row wrap;
+  font-weight: bold;
+  text-align: center;
+}
+
+.wrapper > * {
+  padding: 10px;
+  flex: 1 100%;
+}
+
+.header {
+  background: gray;
+}
+
+.footer {
+  background: lightgreen;
+}
+
+.main {
+  text-align: left;
+  background: blue;
+}
+
+.aside-1 {
+  background: gold;
+}
+
+.aside-2 {
+  background: green;
+}
+
+@media all and (min-width: 600px) {
+  .aside { flex: 1 0 0; }
+}
+
+@media all and (min-width: 800px) {
+  .main    { flex: 3 0px; }
+  .aside-1 { order: 1; }
+  .main    { order: 2; }
+  .aside-2 { order: 3; }
+  .footer  { order: 4; }
+}
+
+body {
+  padding: 2em;
+}
+
+.main-wrap {
+  display: flex;
+  background: #ccc;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+.main-wrap-end {
+  align-content: flex-end;
+}
