@@ -18,11 +18,46 @@
 <body class="grid-example">
     <header class="grid-element bg-gray grid-header">Шапка страницы</header>
     <main class="bg-yellow grid-main">Основная часть
-        <section class="grid-main-container">
-            <span class="grid-element item-center">One</span>
-            <span class="grid-element item-center">Two</span>
-            <span class="grid-element item-end">Three</span>
-        </section>
+
+        <div class="page">
+			<section class="content">
+				<div class="content__columns">
+					<div class="content__column">
+						<div
+							class="content__column-image content__column-image_hero_laika"
+						></div>
+						<div class="column__description">
+							<h3 class="content__column-title">One</h3>
+							<blockquote class="column__quote"
+								>Quote 1</blockquote
+							>
+						</div>
+					</div>
+					<div class="content__column">
+						<div
+							class="content__column-image content__column-image_hero_lunohod"
+						></div>
+						<div class="column__description">
+							<h3 class="content__column-title">Two</h3>
+							<blockquote class="column__quote"
+								>Quote 2</blockquote
+							>
+						</div>
+					</div>
+					<div class="content__column">
+						<div
+							class="content__column-image content__column-image_hero_tesla"
+						></div>
+						<div class="column__description">
+							<h3 class="content__column-title">Three</h3>
+							<blockquote class="column__quote"
+								>Quote 3</blockquote
+							>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
     </main>
     <aside class="grid-element bg-green grid-aside">Боковая область
         <div id="socials">
