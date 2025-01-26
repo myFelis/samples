@@ -1,0 +1,70 @@
+<html>
+<head>
+    <title>ToDo List</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding-top: 50px;
+        }
+        .result {
+            margin-top: 30px;
+            font-weight: bold;
+        }
+        .complete-task {
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mb-4">ToDo List</h1>
+        
+        <form id="todoForm" class="mb-4">
+            <div class="mb-3">
+
+                <label for="numberInput" class="form-label">Enter a new Task:</label>
+                <input type="text" class="form-control" id="textInput" required>
+
+            </div>
+            <button type="submit" class="btn btn-primary">Click to add the Task to your awesome ToDo list</button>
+        </form>
+        
+        <div id="message" class="result text-center"></div>
+
+        <ul id="tasks">
+            <li> click the Task when it completes </li>
+        </ul>
+
+    </div>
+
+    <script>
+        document.getElementById('todoForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const task = document.getElementById('textInput').value;
+            const tasks =  document.getElementById('tasks');
+            let message = '';
+
+            function completeTask(element) {
+                console.log("element" + element + element.target)
+                 element.target.classList.toggle('complete-task')
+            }
+
+            if (! message) {
+                
+                function addNewTask(taskList, task) {
+                    const taskNode = document.createElement('li')
+                    const textnode = document.createTextNode(task);
+
+                    taskNode.appendChild(textnode);
+                    taskList.appendChild(taskNode);
+                    return taskNode;
+                }
+                const newTask = addNewTask(tasks, task);
+                console.log(newTask)
+                newTask.addEventListener("click", completeTask);
+            }
+        });
+    </script>
+</body>
+</html>
