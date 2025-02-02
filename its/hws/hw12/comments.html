@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Модерация комментариев</title>
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .comment {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .author {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="input-group">
+            <label>Имя:</label>
+            <input type="text" id="name" placeholder="Введите имя">
+        </div>
+        
+        <div class="input-group">
+            <label>Аватар (URL):</label>
+            <input type="url" id="avatar" placeholder="https://example.com/avatar.jpg">
+        </div>
+        
+        <div class="input-group">
+            <label>Сообщение:</label>
+            <textarea id="message" rows="4"></textarea>
+        </div>
+        
+        <button onclick="addComment()">Добавить комментарий</button>
+        
+        <div id="comments"></div>
+    </div>
+
+    <script>
+        // Обработка имени
+        function formatName(name) {
+            return name.trim()
+                       .split(/\s+/)
+                       .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+                       .join(' ');
+        }
+
+        // Проверка на спам
+        function checkSpam(str) {
+            return str.replace(/viagra|xxx|nigg?/gi, '***');
+        }
+
+        // Создание комментария
+        function createCommentElement(name, avatar, message) {
+            const commentDiv = document.createElement('div');
+            commentDiv.className = 'comment';
+            
+            const authorDiv = document.createElement('div');
+            authorDiv.className = 'author';
+            
+            if (avatar) {
+                const img = document.createElement('img');
+                img.src = avatar;
+                img.className = 'avatar';
+                img.alt = 'Аватар';
+                authorDiv.appendChild(img);
+            }
+            
+            const nameHeading = document.createElement('h3');
+            nameHeading.textContent = name;
+            authorDiv.appendChild(nameHeading);
+            
+            const msgContent = document.createElement('p');
+            msgContent.textContent = checkSpam(message);
+            
+            commentDiv.appendChild(authorDiv);
+            commentDiv.appendChild(msgContent);
+            return commentDiv;
+        }
+
+        // Добавление комментария
+        function addComment() {
+            const nameInput = document.getElementById('name');
+            const avatarInput = document.getElementById('avatar');
+            const messageInput = document.getElementById('message');
+            
+            // Форматирование данных
+            const formattedName = formatName(nameInput.value);
+            const avatarURL = avatarInput.value.trim();
+            const cleanedMessage = messageInput.value.trim();
+            
+            // Валидация
+            if (!formattedName) {
+                alert('Пожалуйста, введите имя');
+                return;
+            }
+            if (!cleanedMessage) {
+                alert('Пожалуйста, введите сообщение');
+                return;
+            }
+            
+            // Создание и добавление комментария
+            const commentElement = createCommentElement(formattedName, avatarURL, cleanedMessage);
+
+            document.getElementById('comments').prepend(commentElement);
+            
+            // Очистка полей
+            nameInput.value = '';
+            avatarInput.value = '';
+            messageInput.value = '';
+        }
+    </script>
+</body>
+</html>

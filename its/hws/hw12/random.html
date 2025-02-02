@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Генератор случайных слов</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        #word-container {
+            font-size: 2.5em;
+            letter-spacing: 4px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin: 20px;
+            color: #333;
+        }
+
+        .description {
+            text-align: center;
+            color: #666;
+            max-width: 500px;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="description">
+        <h2>Случайное 4-буквенное слово</h2>
+        <p>Обновляйте страницу для генерации нового слова</p>
+    </div>
+    <div id="word-container"></div>
+
+    <script>
+        // Функция генерации случайного слова
+        function generateRandomWord() {
+            const alphabet = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя';
+            
+            let word = '';
+            for(let i = 0; i < 4; i++) {
+                const randomIndex = Math.floor(Math.random() * alphabet.length);
+                word += alphabet[randomIndex];
+            }
+            
+            return word;
+        }
+        console.log(generateRandomWord());
+
+        // 5. Выводим результат на экран
+        document.addEventListener('DOMContentLoaded', () => {
+            const wordContainer = document.getElementById('word-container');
+            // Генерируем первое слово сразу
+            wordContainer.textContent = generateRandomWord();
+            
+            // Добавляем возможность обновления по клику
+            wordContainer.style.cursor = 'pointer';
+            wordContainer.addEventListener('click', () => {
+                wordContainer.textContent = generateRandomWord();
+            });
+        });
+    </script>
+</body>
+</html>
