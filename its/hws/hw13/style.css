@@ -1,0 +1,38 @@
+.main-calendar {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    text-align: center;
+}
+
+input[type="date"] {
+    padding: 8px;
+    margin: 10px;
+    font-size: 16px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #327135;
+    color: white;
+    border: none;
+    border-radius: 4px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.error {
+    color: red;
+    display: none;
+    margin: 10px;
+}
+
+.result {
+    font-size: 20px;
+    margin: 20px;
+    color: #333;
+}
