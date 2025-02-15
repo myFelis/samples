@@ -1,0 +1,43 @@
+body {
+font-family: Arial, sans-serif;
+max-width: 800px;
+margin: 20px auto;
+padding: 20px;
+background-color: #f0f0f0;
+}
+.students-rates {
+background: white;
+padding: 20px;
+border-radius: 8px;
+box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+.result-section {
+margin: 15px 0;
+padding: 15px;
+background: #f8f9fa;
+border-radius: 5px;
+}
+
+.director-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 15px 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+.director-card:hover {
+    transform: translateY(-3px);
+}
+a {
+    color: #2c87f0;
+    text-decoration: none;
+}
+h2 {
+    color: #333;
+    margin-bottom: 10px;
+}
+.top-film {
+    font-weight: bold;
+    color: #8e1002;
+}
