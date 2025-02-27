@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form id="registrationForm" name="registrationForm">
+        <h2>Форма регистрации</h2>
+        <input type="text" name="firstName" placeholder="Имя" required>
+        <input type="text" name="lastName" placeholder="Фамилия" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="number" name="age" placeholder="Возраст" required>
+				<button type="submit">Зарегистрироваться</button>
+				<button type="reset">Очистить</button>
+</form>
+
+<div id="errorMessage"> </div>
+
+<script>
+
+    //Добавьте обработчик submit на форму
+    //Внутри обработчика события выводите в консоль значение полей
+    //Напишите проверку корректности введённого email
+
+    const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
+    const form = document.forms.registrationForm;
+    const formData = {};
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      for (const field of form.elements) {
+        console.log(field)
+        console.log(field.value)
+        if (field.value.length > 0) {
+          formData[field.name] = field.value.trim()
+        }
+      }
+      console.log(formData)
+    })
+
+
+    const emailInput = form.email;
+    const errorMessage = document.getElementById('errorMessage');
+
+    // Обработчик события input для поля email
+    emailInput.addEventListener('input', function () {
+      const emailValue = emailInput.value.trim();
+      console.log(emailValue)
+
+      if (regex.test(emailValue)) {
+        // Если email соответствует формату, убираем сообщение об ошибке
+        emailInput.classList.remove('error');
+        errorMessage.textContent = '';
+      } else {
+        // Если email не соответствует формату, показываем сообщение об ошибке
+        emailInput.classList.add('error');
+        errorMessage.textContent = 'Некорректный формат Email';
+      }
+    });
+
+
+</script>
+
+</body>
+</html>
