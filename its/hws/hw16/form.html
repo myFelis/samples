@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration Form</title>
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+
+<form onchange="checkFormState" id="registrationForm" name="registrationForm">
+    <h2>Форма регистрации</h2>
+    <input class="form__input" type="text" name="firstName" placeholder="Имя" minlength="2" maxlength="20" required>
+    <input class="form__input" type="email" name="email" placeholder="sample@email.com" minlength="1" required>
+    <input class="form__input" type="number" name="age" placeholder="Возраст" minlength="1" required>
+    <button type="submit" name="submit" disabled>Зарегистрироваться</button>
+    <button type="reset">Очистить</button>
+</form>
+
+<div id="errorMessage"> </div>
+
+
+
+<script>
+    // Поле ввода имени: обязательное поле, должно содержать только буквы и пробелы.
+    // Длина имени должна быть от 2 до 20 символов. Должно иметь атрибуты placeholder и required.
+
+//Поле ввода электронной почты: обязательное поле, должно быть в формате email
+//(содержать символ '@' и доменное имя). Должно иметь атрибуты placeholder и required.
+
+    //Поле ввода возраста: обязательное поле. Должно иметь атрибуты placeholder и required.
+
+    const regexEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    const regexName = /^[a-zA-Z0-9._-]{2,20}$/;
+
+    const form = document.forms.registrationForm;
+    const errorMessage = document.getElementById('errorMessage');
+
+    const nameInput = form.elements.firstName;
+
+    // Обработчик события input для поля email
+    ['focus', 'input'].forEach(key => nameInput.addEventListener(key, handleName));
+
+    function handleName(event) {
+      const nameValue = nameInput.value.trim();
+      console.log(nameInput)
+
+      if (regexName.test(nameValue)) {
+        // Если name соответствует формату, убираем сообщение об ошибке
+        nameInput.classList.remove('error');
+        errorMessage.textContent = '';
+      } else {
+        // Если name не соответствует формату, показываем сообщение об ошибке
+        nameInput.classList.add('error');
+        errorMessage.textContent = 'Некорректный формат имени';
+      }
+    };
+
+
+    const emailInput = form.elements.email;
+
+
+    ['focus', 'input'].forEach(key => emailInput.addEventListener(key, handleEmail));
+
+    // Обработчик события input для поля email
+    function handleEmail(event) {
+      const emailValue = emailInput.value.trim();
+      console.log(emailValue)
+
+      if (regexEmail.test(emailValue)) {
+        // Если email соответствует формату, убираем сообщение об ошибке
+        emailInput.classList.remove('error');
+        errorMessage.textContent = '';
+      } else {
+        // Если email не соответствует формату, показываем сообщение об ошибке
+        emailInput.classList.add('error');
+        errorMessage.textContent = 'Некорректный формат Email';
+      }
+    };
+
+
+// Поле выбора пола: представленное в виде radio buttons для выбора между мужчиной и женщиной
+    //Поле выбора профессии: обязательное поле, представленное в виде выпадающего списка (select).
+    //Должно иметь атрибуты required и placeholder для выбора профессии.
+    //Варианты профессий: Врач, Программист, Учитель, Дизайнер, Инженер, Продавец, Другое.
+
+//Поле ввода пароля: обязательное поле, должно быть не менее 8 символов длиной
+//и содержать как минимум одну заглавную букву, одну строчную букву и одну цифру.
+//Должно иметь атрибуты placeholder, required, minlength и pattern.
+    //Поле checkbox, показывающее согласие пользователя с обработкой данных. Должно иметь атрибут required.
+
+function checkFormState() {
+    const formData = {};
+    for (const field of form.elements) {
+        console.log(field)
+        console.log(field.value)
+        if (field.value.length > 0) {
+          formData[field.name] = field.value.trim()
+        }
+      }
+
+    const isEmptyValue = (val) => val.length < 1;
+
+    console.log(Object.values(formData).every(isEmptyValue));
+
+    const hasEmptyValue = Object.values(formData).every(isEmptyValue);
+
+    console.log('disabled', form.elements.submit.disabled);
+    console.log(hasEmptyValue, 'empty');
+
+    console.log(errorMessage.textContent === '' && !hasEmptyValue)
+
+    if (errorMessage.textContent === '' && !hasEmptyValue) {
+      console.log('is ok', form.elements.submit.disabled, hasEmptyValue)
+      form.elements.submit.disabled = ''
+      console.log(form.elements.submit.disabled)
+    }
+    else {
+      console.log('is not ok', form.elements.submit.disabled, hasEmptyValue)
+      form.elements.submit.disabled = true
+      console.log(form.elements.submit.disabled)
+    }
+}
+
+form.addEventListener('change', checkFormState)
+
+
+form.addEventListener('submit', function (event) {
+  event.preventDefault();
+
+  console.log(formData)
+
+  //form.submit()
+  form.reset()
+
+})
+
+
+
+<!--    const formSubmit = () => {-->
+<!--        const checkboxes = document.forms.registrationForm.querySelectorAll('input[type="checkbox"]')-->
+<!--        let isChecked = false-->
+
+<!--        checkboxes.forEach(function (checkbox) {-->
+<!--            if (checkbox.checked) {-->
+<!--                isChecked = true;-->
+<!--            }-->
+<!--        })-->
+
+<!--        if (!isChecked) {-->
+<!--            document.getElementById('practicum').textContent = 'Проверка не пройдена'-->
+<!--        } else {-->
+<!--            document.getElementById('practicum').textContent = 'Проверка пройдена'-->
+<!--        }-->
+<!--    }-->
+<!--    formSubmit()-->
+
+
+<!--    const setColor = () => {-->
+<!--      const inputs = document.querySelectorAll('.form__input')-->
+<!--      inputs.forEach(function (input) {-->
+<!--        input.addEventListener('focus', function () {-->
+<!--          input.style.outline = 'none'-->
+<!--          input.style.border = '1px solid #00ff00'-->
+<!--        })-->
+<!--        input.addEventListener('blur', function () {-->
+<!--          input.style.border = ''-->
+<!--        })-->
+<!--      })-->
+<!--    }-->
+<!--    setColor()-->
+
+
+<!--    const formTwo = document.forms.formTwo;-->
+<!--    const resultElement = document.getElementById('practicum')-->
+
+<!--    function formSubmit(form, paragraph) {-->
+<!--        const checkboxes = form.querySelectorAll('input[type="checkbox"]:checked')-->
+<!--        const selectedOptions = Array.from(checkboxes).map((checkbox) => checkbox.labels[0].textContent)-->
+
+<!--        //Ваш код-->
+<!--      paragraph.textContent = selectedOptions.join(',')-->
+<!--    }-->
+
+<!--    formSubmit(formTwo, resultElement)-->
+
+
+</script>
+
+</body>
+</html>
+
