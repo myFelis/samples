@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form id="registrationForm" name="registrationForm">
+        <h2>Форма регистрации</h2>
+        <input type="text" name="firstName" placeholder="Имя" required>
+        <input type="text" name="lastName" placeholder="Фамилия" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="number" name="age" placeholder="Возраст" required>
+				<button type="submit">Зарегистрироваться</button>
+				<button type="reset">Очистить</button>
+</form>
+
+<div id="errorMessage"> </div>
+
+<div class="form">
+    <h2>Форма 2</h2>
+    <form name="formTwo" class="secondForm">
+        <label for="secondName" class="form__label">Имя:</label>
+        <input type="text" id="secondName" name="secondName" class="form__input"><br>
+
+        <label for="secondEmail" class="form__label">Email:</label>
+        <input type="email" id="secondEmail" name="secondEmail" class="form__input"><br>
+
+        <label class="form__label">Выберите варианты:</label>
+        <div class="flex"><input type="checkbox" id="checkbox1" name="checkboxOne" class="form__checkbox">
+
+            <label for="checkbox1">Вариант 1</label>
+        </div>
+
+        <div class="flex">
+            <input type="checkbox" id="checkbox2" name="checkboxTwo" class="form__checkbox">
+            <label for="checkbox2">Вариант 2</label>
+        </div>
+        <div class="flex">
+            <input type="checkbox" id="checkbox3" name="checkboxThree" class="form__checkbox">
+            <label for="checkbox3">Вариант 3</label>
+        </div>
+
+        <input name="secondButton" type="submit" class="form__submit" value="Отправить">
+    </form>
+</div>
+
+
+
+<script>
+
+    //Добавьте обработчик submit на форму
+    //Внутри обработчика события выводите в консоль значение полей
+    //Напишите проверку корректности введённого email
+
+    const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
+    const form = document.forms.registrationForm;
+    const formData = {};
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      for (const field of form.elements) {
+        console.log(field)
+        console.log(field.value)
+        if (field.value.length > 0) {
+          formData[field.name] = field.value.trim()
+        }
+      }
+      console.log(formData)
+    })
+
+
+    const emailInput = form.email;
+    const errorMessage = document.getElementById('errorMessage');
+
+    // Обработчик события input для поля email
+    emailInput.addEventListener('input', function () {
+      const emailValue = emailInput.value.trim();
+      console.log(emailValue)
+
+      if (regex.test(emailValue)) {
+        // Если email соответствует формату, убираем сообщение об ошибке
+        emailInput.classList.remove('error');
+        errorMessage.textContent = '';
+      } else {
+        // Если email не соответствует формату, показываем сообщение об ошибке
+        emailInput.classList.add('error');
+        errorMessage.textContent = 'Некорректный формат Email';
+      }
+    });
+
+    const formSubmit = () => {
+        const checkboxes = document.forms.formTwo.querySelectorAll('input[type="checkbox"]')
+        let isChecked = false
+
+        checkboxes.forEach(function (checkbox) {
+            if (checkbox.checked) {
+                isChecked = true;
+            }
+        })
+
+        if (!isChecked) {
+            document.getElementById('practicum').textContent = 'Проверка не пройдена'
+        } else {
+            document.getElementById('practicum').textContent = 'Проверка пройдена'
+        }
+    }
+    formSubmit()
+
+
+    const setPlaceholder = () => {
+      const inputFields = document.querySelectorAll('.form__input')
+
+      inputFields.forEach(function(input) {
+        input.setAttribute('placeholder', 'Введите данные')
+      })
+    }
+    setPlaceholder()
+
+
+    const setColor = () => {
+      const inputs = document.querySelectorAll('.form__input')
+      inputs.forEach(function (input) {
+        input.addEventListener('focus', function () {
+          input.style.outline = 'none'
+          input.style.border = '1px solid #00ff00'
+        })
+        input.addEventListener('blur', function () {
+          input.style.border = ''
+        })
+      })
+    }
+    setColor()
+
+
+    const formTwo = document.forms.formTwo;
+    const resultElement = document.getElementById('practicum')
+
+    function formSubmit(form, paragraph) {
+        const checkboxes = form.querySelectorAll('input[type="checkbox"]:checked')
+        const selectedOptions = Array.from(checkboxes).map((checkbox) => checkbox.labels[0].textContent)
+
+        //Ваш код
+      paragraph.textContent = selectedOptions.join(',')
+    }
+
+    formSubmit(formTwo, resultElement)
+
+
+</script>
+
+</body>
+</html>
