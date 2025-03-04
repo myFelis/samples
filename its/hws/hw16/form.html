@@ -7,22 +7,30 @@
 </head>
 <body>
 
-<form onchange="checkFormState" id="registrationForm" name="registrationForm">
+<form onchange="checkFormState()" id="registrationForm" name="registrationForm">
     <h2>Форма регистрации</h2>
-    <input class="form__input" type="text" name="firstName" placeholder="Имя" minlength="2" maxlength="20" required>
-    <input class="form__input" type="text" name="password" placeholder="Пароль LfkAkd123" minlength="8" maxlength="40" required>
-    <input class="form__input" type="email" name="email" placeholder="sample@email.com" minlength="1" required>
-    <input class="form__input" type="number" name="age" placeholder="Возраст" minlength="1" required>
-    <br/><br/>
-    <label for="checkbox">Cогласен на обработку данных</label>
-    <input type="checkbox" id="checkbox" name="checkbox" class="form__checkbox">
+    <input class="form-group" type="text" name="firstName" placeholder="Имя" minlength="2" maxlength="20" required>
+    <input class="form-group" type="text" name="password" placeholder="Пароль LfkAkd123" minlength="8" maxlength="40" required>
+    <input class="form-group" type="number" name="age" placeholder="Возраст" minlength="1" required>
+    <input class="form-group" type="email" name="email" placeholder="sample@email.com" minlength="1" required>
     <br/>
 
-    <label>Пол:</label>
-    <input type="radio" id="form__gender-male" name="gender" value="male" required>
-    <label for="form__gender-male">Мужской</label>
-    <input type="radio" id="form__gender-female" name="gender" value="female" required>
-    <label for="form__gender-female">Женский</label>
+    <div class="form-group">
+        <div class="radio-group">
+            <input type="checkbox" id="checkbox" name="checkbox" class="form-group">
+            <label for="checkbox">Cогласен на обработку данных</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Пол:</label>
+        <div class="radio-group">
+            <input type="radio" id="form__gender-male" name="gender" value="male" required>
+            <label for="form__gender-male"> Мужской</label>
+            <input type="radio" id="form__gender-female" name="gender" value="female" required>
+            <label for="form__gender-female"> Женский</label>
+        </div>
+    </div>
     <br/>
 
     <label for="form__prof-type">Профессия:</label>
@@ -41,10 +49,8 @@
     <button type="submit" name="submit" disabled>Зарегистрироваться</button>
     <button type="reset">Очистить</button>
     <br/><br/>
-    <div id="errorMessage" onchange="checkFormState"></div>
+    <div id="errorMessage" onchange="checkFormState()"></div>
 </form>
-
-
 
 
 
@@ -67,7 +73,7 @@
 
     const nameInput = form.elements.firstName;
 
-    ['focus', 'input'].forEach(key => nameInput.addEventListener(key, handleName));
+    ['focus', 'input', 'blur'].forEach(key => nameInput.addEventListener(key, handleName));
 
     function handleName(event) {
       const nameValue = nameInput.value;
@@ -82,12 +88,13 @@
         nameInput.classList.add('error');
         errorMessage.textContent = 'Некорректный формат имени';
       }
+      checkFormState()
     };
 
     const passwordInput = form.elements.password;
 
     // Обработчик события input для поля password
-    ['focus', 'input'].forEach(key => passwordInput.addEventListener(key, handlePass));
+    ['focus', 'input', 'blur'].forEach(key => passwordInput.addEventListener(key, handlePass));
 
     function handlePass(event) {
       const passValue = passwordInput.value.trim();
@@ -100,12 +107,13 @@
         passwordInput.classList.add('error');
         errorMessage.textContent = 'Некорректный формат пароля';
       }
+      checkFormState()
     };
 
 
     const emailInput = form.elements.email;
 
-    ['focus', 'input'].forEach(key => emailInput.addEventListener(key, handleEmail));
+    ['focus', 'input', 'blur'].forEach(key => emailInput.addEventListener(key, handleEmail));
 
     // Обработчик события input для поля email
     function handleEmail(event) {
@@ -119,6 +127,20 @@
         emailInput.classList.add('error');
         errorMessage.textContent = 'Некорректный формат Email';
       }
+      checkFormState()
+    };
+
+
+    const checkboxInput = form.elements.checkbox;
+
+    ['focus', 'input', 'blur'].forEach(key => checkboxInput.addEventListener(key, handleCheckbox));
+
+    // Обработчик события input для поля checkbox
+    function handleCheckbox() {
+      if (checkboxInput.checked) {
+            errorMessage.textContent = '';
+      }
+      checkFormState()
     };
 
 
@@ -143,16 +165,7 @@ function checkFormState() {
     console.log('disabled', form.elements.submit.disabled);
     console.log(hasEmptyValue, 'empty');
 
-    if (errorMessage.textContent === '' && !hasEmptyValue) {
-      console.log('is ok', form.elements.submit.disabled, hasEmptyValue)
-      form.elements.submit.disabled = ''
-    }
-    else {
-      console.log('is not ok', form.elements.submit.disabled, hasEmptyValue)
-      form.elements.submit.disabled = true
-    }
-
-
+    const errorContent = errorMessage.textContent
 
     const checkboxes = form.querySelectorAll('input[type="checkbox"]')
     let isChecked = false
@@ -164,11 +177,21 @@ function checkFormState() {
     })
 
     if (!isChecked) {
-        errorMessage.textContent = 'Необходимо согласие';
+        errorMessage.textContent = errorContent ? errorContent : 'Необходимо согласие';
     } else {
-        errorMessage.textContent = '';
+        errorMessage.textContent = errorContent ? errorContent : '';
     }
 
+    if (errorContent === '' && !hasEmptyValue) {
+      console.log('is ok', form.elements.submit.disabled, hasEmptyValue)
+      form.elements.submit.disabled = ''
+      form.elements.submit.style.background = '#4CAF50'
+    }
+    else {
+      console.log('is not ok', form.elements.submit.disabled, hasEmptyValue)
+      form.elements.submit.disabled = true
+      form.elements.submit.style.background = 'gray'
+    }
 
     return formData
 }

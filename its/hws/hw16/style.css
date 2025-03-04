@@ -78,13 +78,12 @@ select, input[type="text"], input[type="number"] {
 }
 
 button {
-    background: #4CAF50;
+    background: gray;
     color: white;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s;
+
 }
 
 button:hover {
