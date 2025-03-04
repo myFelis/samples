@@ -1,8 +1,9 @@
 body {
     font-family: Arial, sans-serif;
-    max-width: 600px;
+    max-width: 800px;
     margin: 20px auto;
     padding: 0 20px;
+    background-color: #f5f5f5;
 }
 h1 {
     color: #333;
@@ -19,4 +20,82 @@ li {
 }
 .form__input {
     border: 2px
+}
+
+.calculator {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.form-group {
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background 0.4s;
+}
+
+.form-group:hover {
+    background: #e0f8e3;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+select, input[type="text"], input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.radio-group, .checkbox-group {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.hidden {
+    display: none;
+}
+
+#error-message {
+    color: red;
+    margin: 10px 0;
+}
+
+#total-price {
+    font-size: 24px;
+    font-weight: bold;
+    color: green;
+    margin-top: 20px;
+    transition: opacity 0.3s;
+}
+
+button {
+    background: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: #45a049;
+}
+
+.highlight {
+    animation: highlight 2s;
+}
+
+@keyframes highlight {
+    from { background: #e0f8e3; }
+    to { background: white; }
 }

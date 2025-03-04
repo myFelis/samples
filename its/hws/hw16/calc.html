@@ -1,10 +1,206 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор стоимости автомобиля</title>
+    <link href="style.css" rel="stylesheet">
 </head>
 <body>
+    <form id="calcForm" name="calcForm">
+        <div class="calculator">
+            <h1>Калькулятор стоимости автомобиля</h1>
+            
+            <div class="form-group">
+                <label>Марка автомобиля:</label>
+                <select id="carMake" name="carMake">
+                    <option value="">Выберите марку</option>
+                    <option value="Reno">Reno</option>
+                    <option value="Opel">Opel</option>
+                    <option value="Mazda">Mazda</option>
+                    <option value="Jaguar">Jaguar</option>
+                </select>
+            </div>
 
+            <div class="form-group">
+                <label>Модель автомобиля:</label>
+                <select id="carModel" name="carModel" disabled></select>
+            </div>
+
+            <div class="form-group">
+                <label>Тип топлива:</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="fuel" value="petrol" checked> Бензин</label>
+                    <label><input type="radio" name="fuel" value="diesel"> Дизель</label>
+                    <label><input type="radio" name="fuel" value="gas"> Газ</label>
+                    <label><input type="radio" name="fuel" value="electric"> Электричество</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Объем двигателя (1.1-3.5 л):</label>
+                <input type="number" id="engineVolume" name="engineVolume" min="1.1" max="3.5" step="0.1" value="1.5">
+            </div>
+
+            <div class="form-group">
+                <label>Состояние:</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="condition" value="new" checked> Новый</label>
+                    <label><input type="radio" name="condition" value="used"> Подержанный</label>
+                </div>
+            </div>
+
+            <div id="ownersGroup" class="form-group hidden">
+                <label>Количество владельцев:</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="owners" value="1-2"> 1-2 владельца</label>
+                    <label><input type="radio" name="owners" value="3+"> Более 3-х</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Способ оплаты:</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="payment" value="card" checked> Картой</label>
+                    <label><input type="radio" name="payment" value="cash"> Наличными</label>
+                    <label><input type="radio" name="payment" value="legal"> Юр. лицо</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Дополнительно:</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" id="insurance"> Страховка</label>
+                    <label><input type="checkbox" id="winterTires"> Зимняя резина</label>
+                </div>
+            </div>
+
+            <div id="error-message"></div>
+            <div id="total-price"></div>
+            
+            <button onclick="resetCalculator()">Сбросить</button>
+        </div>
+    </form>
+
+
+    
+    <script>
+
+        formElements = document.forms.calcForm.elements
+        const models = {
+            'Reno': ['Logan', 'Sandero', 'Duster'],
+            'Opel': ['Corsa', 'Astra', 'Insignia'],
+            'Mazda': ['3', '6', 'CX-5'],
+            'Jaguar': ['XE', 'XF', 'F-PACE']
+        };
+
+        const basePrices = {
+            'Reno': 800000,
+            'Opel': 1200000,
+            'Mazda': 1500000,
+            'Jaguar': 3500000
+        };
+
+        // Инициализация калькулятора
+        formElements.carMake.addEventListener('change', function() {
+            const make = this.value;
+            const modelSelect = formElements.carModel;
+            
+            modelSelect.innerHTML = '<option value="">Выберите модель</option>';
+            if (models[make]) {
+                models[make].forEach(model => {
+                    const option = document.createElement('option');
+                    option.value = model;
+                    option.textContent = model;
+                    modelSelect.appendChild(option);
+                });
+                modelSelect.disabled = false;
+            } else {
+                modelSelect.disabled = true;
+            }
+            calculatePrice();
+        });
+
+        // Обработчики событий
+        document.querySelectorAll('input, select').forEach(element => {
+            element.addEventListener('change', calculatePrice);
+        });
+
+        formElements.engineVolume.addEventListener('input', calculatePrice);
+
+        // Показать-скрыть владельцев
+        document.querySelectorAll('input[name="condition"]').forEach(radio => {
+            radio.addEventListener('change', () => {
+                document.getElementById('ownersGroup').classList.toggle('hidden', 
+                    document.querySelector('input[name="condition"]:checked').value !== 'used');
+            });
+        });
+
+        function calculatePrice() {
+            try {
+                const make = formElements.carMake.value;
+                const model = formElements.carModel.value;
+                const engineVolume = parseFloat(formElements.engineVolume.value);
+                const condition = document.querySelector('input[name="condition"]:checked').value;
+                const payment = document.querySelector('input[name="payment"]:checked').value;
+                
+                // Валидация
+                if (!make) throw new Error('Выберите марку автомобиля');
+                if (!model) throw new Error('Выберите модель автомобиля');
+                if (engineVolume < 1.1 || engineVolume > 3.5) throw new Error('Некорректный объем двигателя');
+
+                let price = basePrices[make];
+
+                // Дополнительные расчеты
+                if (condition === 'used') {
+                    price *= 0.8; // Снижение цены для подержанных авто
+                }
+
+                if (engineVolume > 2.5) {
+                    price *= 1.2; // Увеличение цены для больших объемов двигателя
+                }
+
+                if (document.getElementById('insurance').checked) {
+                    price += 50000;
+                }
+
+                if (document.getElementById('winterTires').checked) {
+                    price += 20000;
+                }
+
+                // Отображение результата
+                const totalPrice = document.getElementById('total-price')
+                totalPrice.textContent = `Итоговая стоимость: ${price.toLocaleString()} руб.`;
+                totalPrice.classList.add('highlight');
+                setTimeout(() => totalPrice.classList.remove('highlight'), 1000);
+                document.getElementById('error-message').textContent = '';
+
+            } catch (error) {
+                document.getElementById('error-message').textContent = error.message;
+                document.getElementById('total-price').textContent = '';
+            }
+        }
+
+
+        function resetCalculator() {
+            
+            formElements.carMake.value = '';
+            formElements.carModel.innerHTML = '<option value="">Выберите модель</option>';
+            formElements.carModel.disabled = true;
+            document.querySelector('input[name="fuel"][value="petrol"]').checked = true;
+            document. formElements.engineVolume.value = 1.5;
+            document.querySelector('input[name="condition"][value="new"]').checked = true;
+            document.querySelector('input[name="payment"][value="card"]').checked = true;
+            document.getElementById('insurance').checked = false;
+            document.getElementById('winterTires').checked = false;
+            document.getElementById('ownersGroup').classList.add('hidden');
+            document.getElementById('total-price').textContent = '';
+            document.getElementById('error-message').textContent = '';
+        }
+
+    </script>
+
+    // Не срабатывает выбор модели, если подключать код через отдельный файл, втф?
+    <!-- <script href="calc.js"></script> -->
 </body>
 </html>
