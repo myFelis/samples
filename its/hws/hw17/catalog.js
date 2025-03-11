@@ -115,5 +115,7 @@ function renderTransport() {
         });
         }
 
+        // TODO: Добавить две вспомогательные функции: createTransportBy(type) и createTransportCard(transport)
+
         // Инициализация при загрузке страницы
 window.onload = renderTransport;

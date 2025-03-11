@@ -65,7 +65,7 @@
 //Поле ввода пароля: обязательное поле, должно быть не менее 8 символов длиной
 
     const regexEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-    const regexName = /^[a-zA-Z0-9._-]{2,20}$/;
+    const regexName = /^[a-zA-Z0-9._-\s]{2,20}$/;
     const regexPassword = /^[a-zA-Z0-9._-]{8,40}$/;
 
     const form = document.forms.registrationForm;
