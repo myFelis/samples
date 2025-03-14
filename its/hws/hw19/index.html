@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список задач</title>
+    <link href="style.css" rel="stylesheet">
+    
+    
+</head>
+<body>
+    <div class="container">
+        <div class="input-group">
+            <input type="text" id="taskInput" placeholder="Введите новую задачу...">
+            <button onclick="addTask()">Добавить</button>
+        </div>
+
+        <div id="tasksContainer">
+            <ul class="tasks-list" id="tasksList"></ul>
+            <div class="empty-state" id="emptyState">Задачи отсутствуют</div>
+        </div>
+
+        <button id="clearButton" onclick="clearTasks()" disabled>Очистить список</button>
+    </div>
+
+    
+    <script src="sample.js"></script>
+</body>
+</html>
