@@ -1,5 +1,5 @@
 :root {
-    --primary: #FF4D4D;
+    --primary: #4a0240;
     --background: #1A1A1A;
     --card-bg: #2D2D2D;
     --text: #FFFFFF;
@@ -42,8 +42,8 @@ body {
 }
 
 .hero-image {
-    width: 100%;
-    height: 250px;
+    width: 90%;
+    height: 80%;
     object-fit: cover;
     border-bottom: 3px solid var(--primary);
 }
@@ -54,7 +54,7 @@ body {
 }
 
 .hero-title {
-    color: var(--primary);
+    color: rgba(212, 10, 51, 0.766);
     margin-bottom: 15px;
     font-size: 1.5rem;
 }
@@ -67,7 +67,7 @@ body {
 }
 
 .stat-item {
-    background: rgba(255, 77, 77, 0.1);
+    background: rgba(115, 1, 130, 0.1);
     padding: 8px;
     border-radius: 8px;
     text-align: center;
@@ -76,7 +76,7 @@ body {
 .rating-container {
     margin-top: auto;
     padding: 15px 20px;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(75, 3, 75, 0.729);
     display: flex;
     justify-content: center;
     gap: 8px;
@@ -100,7 +100,7 @@ body {
     }
 
     .hero-image {
-        height: 200px;
+        height: 50%;
     }
 
     .heart {

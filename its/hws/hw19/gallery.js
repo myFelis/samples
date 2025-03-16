@@ -118,22 +118,22 @@ const heroes = [
       },
       {
         id: 11,
-        name: 'Superman',
-        url: 'https://example.com/superman.jpg',
+        "name": "Дэдпул",
         stats: {
-            power: 100,
-            speed: 95,
-            intelligence: 85,
-            durability: 100
+        "universe": "Marvel Comics",
+        "alterego": "Уэйд Уинстон Уилсон",
+        "occupation": "антигерой, наёмник",
+        "friends": "частично Мстители, Человек-паук, Росомаха",
+        "superpowers": "высокий болевой порог, регенерация и бессмертие, сверхчеловеческая иммунная система",
         },
-        info: 'The Man of Steel from Krypton'
-    },
+        "url": "https://n1s1.hsmedia.ru/34/93/39/3493392c94fc2ae0552ef9c7e87f2617/728x382_1_cc2a743fd686b7b2e256c062966bb465@1034x543_0xac120002_2692921231540468872.jpg",
+        "info": "Как и Росомаха из Людей Икс, Дэдпул был подвергнут опытам по программе «Оружие Икс». Ученые попытались исцелить его рак, привив его клеткам способность к регенерации. Как и всегда в комиксах, что-то пошло не так, и Дэдпул остался изуродованным и психически нестабильным. Это единственный супергерой из списка, который однозначно не на стороне добра. Дэдпул наслаждается насилием. Первоначально появившись в основной Вселенной Marvel, он получил альтернативные варианты в других реальностях Мультивселенной. Что оставалось неизменным — его циничное, чёрное чувство юмора: за него Дэдпула прозвали «Болтливым наёмником»"
+      }
 ];
 
 function createHeroCard(hero) {
     const card = document.createElement('article');
     card.className = 'hero-card';
-    console.log(hero, 'hero')
     card.innerHTML = `
         <img src="${hero.url}" alt="${hero.name}" class="hero-image">
         <div class="hero-content">
@@ -189,7 +189,6 @@ function initializeRatings() {
 // Initialize gallery
 const gallery = document.getElementById('gallery-container');
 heroes.forEach(hero => {
-    console.log(hero.info)
     gallery.appendChild(createHeroCard(hero));
 });
 
