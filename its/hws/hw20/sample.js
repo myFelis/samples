@@ -1,5 +1,5 @@
 const UI_ELEMENTS = {
-  CONT: document.getElementById('postsContainer'),
+  CONTAINER: document.getElementById('postsContainer'),
 }
 
       // Функция для создания HTML-разметки поста
@@ -12,12 +12,12 @@ function createPostMarkup(post) {
     `;
 }
 
-async function addPostToContainer(container, markup) {
-    container.insertAdjacentHTML('beforeEnd', markup);
+async function addPost(markup) {
+    UI_ELEMENTS.CONTAINER.insertAdjacentHTML('beforeEnd', markup);
 }
 
-async function fetchAndShowPosts() {
-    const container = UI_ELEMENTS.CONT;
+async function showPosts() {
+    const container = UI_ELEMENTS.CONTAINER;
     
     try {
         const response = await fetch('https://jsonplaceholder.typicode.com/posts');
@@ -28,7 +28,7 @@ async function fetchAndShowPosts() {
         
         posts.forEach(post => {
             const postMarkup = createPostMarkup(post);
-            addPostToContainer(container, postMarkup);
+            addPost(postMarkup);
         });
     } catch (error) {
         container.innerHTML = '<div class="loading">Error loading posts. Please try again later.</div>';
@@ -36,4 +36,4 @@ async function fetchAndShowPosts() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', fetchAndShowPosts);
+document.addEventListener('DOMContentLoaded', showPosts);

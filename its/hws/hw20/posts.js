@@ -2,8 +2,10 @@
 // const postsContainer = document.getElementById('postsContainer');
 
 const UI_ELEMENTS = {
-    CONT: document.getElementById('postsContainer'),
+    CONTAINER: document.getElementById('postsContainer'),
     FORM: document.getElementById('postForm'),
+    TITLE: document.getElementById('postTitle'),
+    BODY: document.getElementById('postBody'),
   }
 
 
@@ -21,8 +23,8 @@ function createPost(post) {
 function handleSubmit(e) {
     e.preventDefault();
 
-    const title = document.getElementById('postTitle').value;
-    const body = document.getElementById('postBody').value;
+    const title = UI_ELEMENTS.TITLE.value;
+    const body = UI_ELEMENTS.BODY.value;
     const postData = {
             title,
             body,
@@ -38,8 +40,7 @@ function handleSubmit(e) {
     })
     .then(response => response.json())
     .then(data => {
-        const newPost = createPost(data);
-        UI_ELEMENTS.CONT.prepend(newPost);
+        UI_ELEMENTS.CONTAINER.prepend(createPost(data));
         UI_ELEMENTS.FORM.reset();
     })
     .catch(error => console.error('Error:', error));
