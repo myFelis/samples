@@ -11,16 +11,23 @@ const showLoading = () => {
     errorBox.style.display = 'none';
 };
 
+const entityIdFrom = 1;
+const entityIdTo = 10;
+
+const beautifyTitle = (title) => {
+    return title.replace(/_/g, ' ').toUpperCase()
+};
+
 const showResult = (data) => {
     let html = '';
     for (const [key, value] of Object.entries(data)) {
         if (Array.isArray(value)) continue;
-        const isValue = typeof value === 'string' && value.startsWith('http')
-                    ? `<a href="${value}" target="_blank">${value}</a>`
-                    : value
+
+        const isLink = typeof value === 'string' && value.startsWith('http')
+        const isValue = isLink ? `<a href="${value}" target="_blank">${value}</a>` : value
         html += `
             <div class="result-item">
-                <strong>${key.replace(/_/g, ' ').toUpperCase()}:</strong>
+                <strong>${beautifyTitle(key)}:</strong>
                 ${isValue}
             </div>
         `;
@@ -46,6 +53,11 @@ const handleResponse = async (response) => {
     return response.json();
 };
 
+const fetchData = async (fetchType, fetchId) => {
+    const response = await fetch(`https://swapi.py4e.com/api/${fetchType}/${fetchId}/`);
+    return await handleResponse(response);
+}
+
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
@@ -57,19 +69,15 @@ form.addEventListener('submit', async (e) => {
         return;
     }
 
-    if (entityId < 1 || entityId > 10) {
-        showError('ID must be between 1 and 10');
+    if (entityId < entityIdFrom || entityId > entityIdTo) {
+        showError(`ID must be between ${entityIdFrom} and ${entityIdTo}`);
         return;
     }
 
     try {
         showLoading();
-        const responseUrl = `${entityType}/${entityId}/`
-        const response = await fetch(`https://swapi.py4e.com/api/${responseUrl}`);
-
-        const data = await handleResponse(response);
+        const data = await fetchData(entityType, entityId);
         showResult(data);
-
     } catch (error) {
         const errorMessage = error.status
             ? `Error ${error.status}: ${error.message || 'Resource not found'}`
