@@ -1,0 +1,548 @@
+.tariffCard {
+  position: relative;
+  border-radius: 12px;
+  padding: 20px;
+  background-color: white;
+  border: 1px solid #e5e7eb;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+  min-height: 380px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  opacity: 1; /* Карточки всегда видимы */
+}
+
+.tariffCardBasic {
+  background-color: rgba(59, 130, 246, 0.35);
+}
+
+.tariffCardStandard {
+  background-color: rgba(34, 197, 94, 0.35);
+}
+
+.tariffCardPremium {
+  background-color: rgba(239, 68, 68, 0.35);
+  z-index: 2; /* Повышаем z-index для премиум тарифа */
+}
+
+.tariffCardUnlimited {
+  background-color: rgba(139, 92, 246, 0.35);
+}
+
+.tariffCard:hover {
+  /* Удаляем трансформацию, только тень */
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+}
+
+/* Базовые стили для выбранной карточки */
+.selected {
+  border-width: 2px;
+  border-style: solid;
+  animation: pulse 2s infinite;
+}
+
+/* Стили для выбранных карточек разных типов */
+.tariffCardBasic.selected {
+  border-color: #3b82f6;
+  box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.3), 0 4px 6px -2px rgba(59, 130, 246, 0.2);
+}
+
+.tariffCardStandard.selected {
+  border-color: #22c55e;
+  box-shadow: 0 10px 15px -3px rgba(34, 197, 94, 0.3), 0 4px 6px -2px rgba(34, 197, 94, 0.2);
+}
+
+.tariffCardPremium.selected {
+  border-color: #ef4444;
+  box-shadow: 0 10px 15px -3px rgba(239, 68, 68, 0.3), 0 4px 6px -2px rgba(239, 68, 68, 0.2);
+}
+
+.tariffCardUnlimited.selected {
+  border-color: #8b5cf6;
+  box-shadow: 0 10px 15px -3px rgba(139, 92, 246, 0.3), 0 4px 6px -2px rgba(139, 92, 246, 0.2);
+}
+
+/* Анимации пульсации для разных карточек */
+@keyframes pulseBasic {
+  0% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(59, 130, 246, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+  }
+}
+
+@keyframes pulseStandard {
+  0% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(34, 197, 94, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+  }
+}
+
+@keyframes pulsePremium {
+  0% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(239, 68, 68, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+  }
+}
+
+@keyframes pulseUnlimited {
+  0% {
+    box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(139, 92, 246, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(139, 92, 246, 0);
+  }
+}
+
+.tariffCardBasic.selected {
+  animation: pulseBasic 2s infinite;
+}
+
+.tariffCardStandard.selected {
+  animation: pulseStandard 2s infinite;
+}
+
+.tariffCardPremium.selected {
+  animation: pulsePremium 2s infinite;
+}
+
+.tariffCardUnlimited.selected {
+  animation: pulseUnlimited 2s infinite;
+}
+
+.name {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.description {
+  color: #6b7280;
+  font-size: 14px;
+  margin-bottom: 16px;
+  flex-grow: 1;
+}
+
+.speed {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.price {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.speedIndicator {
+  height: 4px;
+  width: 100%;
+  background-color: #e5e7eb;
+  margin-bottom: 16px;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.speedLevel {
+  height: 100%;
+  background-color: #22c55e;
+  transform-origin: left center;
+  width: 0%;
+  animation-duration: 1.5s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+}
+
+.speedLevelLow {
+  background-color: #f59e0b;
+  animation-name: expandWidthLow;
+  animation-delay: 0.6s;
+}
+
+.speedLevelMed {
+  background-color: #3b82f6;
+  animation-name: expandWidthMed;
+  animation-delay: 0.7s;
+}
+
+.speedLevelHigh {
+  background-color: #8b5cf6;
+  animation-name: expandWidthHigh;
+  animation-delay: 0.8s;
+}
+
+.speedLevelMax {
+  background-color: #22c55e;
+  animation-name: expandWidthMax;
+  animation-delay: 0.9s;
+}
+
+@keyframes expandWidthLow {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 20%;
+  }
+}
+
+@keyframes expandWidthMed {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 50%;
+  }
+}
+
+@keyframes expandWidthHigh {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 75%;
+  }
+}
+
+@keyframes expandWidthMax {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.badge {
+  position: absolute;
+  top: -10px;
+  right: 20px;
+  background-color: #ef4444;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  box-shadow: 0 2px 4px rgba(239, 68, 68, 0.3);
+  animation: badgePulse 2s infinite;
+  display: flex;
+  align-items: center;
+  z-index: 15;
+  overflow: visible;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.premiumBadge {
+  position: absolute;
+  top: -10px;
+  left: 20px;
+  background-color: #8b5cf6;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  box-shadow: 0 2px 4px rgba(139, 92, 246, 0.3);
+  animation: badgePulse 2s infinite;
+  display: flex;
+  align-items: center;
+  z-index: 15;
+  overflow: visible;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.badgeIcon {
+  margin-right: 4px;
+  animation: rotateBadge 3s ease-in-out infinite;
+}
+
+@keyframes rotateBadge {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(10deg);
+  }
+  75% {
+    transform: rotate(-10deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes badgePulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.button {
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-weight: 500;
+  cursor: pointer;
+  /* Современная кривая анимации для естественного движения */
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  margin-top: 0;
+  /* Начальная трехмерная тень для объемного эффекта */
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  /* Добавляем эффект увеличения при наведении */
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Базовый тариф - голубой */
+.buttonBasic {
+  background-color: #3b82f6;
+}
+
+.buttonBasic:hover {
+  background-color: #2563eb;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+  /* Эффект лёгкого увеличения */
+  transform: translateY(-1px) scale(1.01);
+}
+
+.buttonBasic:active {
+  background-color: #1e40af;
+  /* Мгновенное нажатие без задержки */
+  transition: all 0.1s ease;
+  transform: translateY(1px) scale(0.99);
+}
+
+/* Стандартный тариф - зеленый */
+.buttonStandard {
+  background-color: #22c55e;
+}
+
+.buttonStandard:hover {
+  background-color: #16a34a;
+  box-shadow: 0 4px 12px rgba(22, 163, 74, 0.4);
+  /* Эффект лёгкого увеличения */
+  transform: translateY(-1px) scale(1.01);
+}
+
+.buttonStandard:active {
+  background-color: #15803d;
+  /* Мгновенное нажатие без задержки */
+  transition: all 0.1s ease;
+  transform: translateY(1px) scale(0.99);
+}
+
+/* Премиум тариф - красный */
+.buttonPremium {
+  background-color: #ef4444;
+}
+
+.buttonPremium:hover {
+  background-color: #dc2626;
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4);
+  /* Эффект лёгкого увеличения */
+  transform: translateY(-1px) scale(1.01);
+}
+
+.buttonPremium:active {
+  background-color: #b91c1c;
+  /* Мгновенное нажатие без задержки */
+  transition: all 0.1s ease;
+  transform: translateY(1px) scale(0.99);
+}
+
+/* Безлимитный тариф - фиолетовый */
+.buttonUnlimited {
+  background-color: #8b5cf6;
+}
+
+.buttonUnlimited:hover {
+  background-color: #7c3aed;
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.4);
+  /* Эффект лёгкого увеличения */
+  transform: translateY(-1px) scale(1.01);
+}
+
+.buttonUnlimited:active {
+  background-color: #6d28d9;
+  /* Мгновенное нажатие без задержки */
+  transition: all 0.1s ease;
+  transform: translateY(1px) scale(0.99);
+}
+
+/* Стиль для выбранной кнопки - современный эффект "нажатия" */
+.buttonSelected {
+  font-weight: 600;
+  /* Комбинация внутренней и внешней тени для объемности */
+  box-shadow: 
+    inset 0 2px 3px rgba(0, 0, 0, 0.2),
+    0 0 0 2px rgba(255, 255, 255, 0.2);
+  cursor: default;
+  /* Тонкая светлая рамка для создания глубины */
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  /* Небольшое уменьшение масштаба для ощущения нажатия */
+  transform: scale(0.98);
+  /* Плавная анимация всех переходов */
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  /* Современный эффект свечения вокруг кнопки */
+  filter: brightness(0.95);
+  padding: 10px 12px;
+}
+
+.buttonSelected:hover {
+  /* Сохраняем внутреннюю тень, но убираем внешнюю при наведении */
+  box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.2);
+  transform: scale(0.98);
+  filter: brightness(0.95);
+}
+
+/* Убираем эффект пульсации для нажатых кнопок */
+.buttonSelected:before {
+  display: none;
+}
+
+.button:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: all 0.5s ease;
+}
+
+.button:hover:before {
+  left: 100%;
+}
+
+.featureSection {
+  margin-top: 24px;
+  width: 100%;
+  background-color: #f8f8f8;
+  border-radius: 0 0 12px 12px;
+  padding: 0 15px 15px;
+  margin: 24px -20px -20px -20px;
+  width: calc(100% + 40px);
+  border-top: none; /* Убираем верхний border */
+}
+
+.featureHighlight {
+  padding: 14px 0;
+  margin: 0 -15px 0 -15px;
+  width: calc(100% + 30px);
+  font-weight: 600;
+  font-size: 14px;
+  text-align: center;
+  font-style: italic;
+  color: #374151;
+  background-color: white;
+  border-radius: 4px 4px 0 0; /* Скругляем только верхние углы */
+  position: relative;
+  transition: all 0.3s ease;
+  border-bottom: none; /* Убираем нижний border */
+}
+
+.tariffCard:hover .featureHighlight {
+  color: #1f2937;
+  background-color: #f9fafb;
+  box-shadow: 0 2px 0px rgba(0, 0, 0, 0.02); /* Уменьшаем тень */
+}
+
+.divider {
+  height: 1px;
+  background-color: #e0e0e0;
+  margin: 0 auto;
+  width: 85%;
+  opacity: 0.6;
+}
+
+.additionalInfo {
+  padding: 5px 0 10px;
+}
+
+.infoItem {
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  color: #4b5563;
+  margin-bottom: 10px;
+  padding-left: 10px;
+  opacity: 0;
+  transform: translateX(-10px);
+  animation: fadeSlideIn 0.5s ease-out forwards;
+}
+
+.infoItem:nth-child(1) {
+  animation-delay: 1.0s;
+}
+
+.infoItem:nth-child(2) {
+  animation-delay: 1.2s;
+}
+
+.infoItem:nth-child(3) {
+  animation-delay: 1.4s;
+}
+
+.infoItem:nth-child(4) {
+  animation-delay: 1.6s;
+}
+
+@keyframes fadeSlideIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.infoItem:last-child {
+  margin-bottom: 0;
+}
+
+.tariffCard:hover .infoItem {
+  transition: all 0.3s ease;
+  color: #374151;
+}
+
+.infoIcon {
+  color: #6b7280;
+  margin-right: 8px;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.tariffCard:hover .infoIcon {
+  color: #4b5563;
+  /* Убираем трансформацию, оставляем только изменение цвета */
+}

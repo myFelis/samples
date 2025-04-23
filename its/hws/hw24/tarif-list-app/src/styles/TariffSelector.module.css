@@ -1,0 +1,207 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 16px;
+}
+
+.subtitle {
+  font-size: 18px;
+  color: #6b7280;
+  max-width: 600px;
+  margin: 0 auto 24px;
+}
+
+/* Стили для переключателя периода оплаты */
+.billingToggle {
+  margin: 30px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.billingPeriodWrapper {
+  display: flex;
+  align-items: center;
+  background-color: #dcfce7;
+  border-radius: 12px;
+  padding: 10px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.billingOption {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #6b7280;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.billingOptionActive {
+  color: #1f2937;
+  font-weight: 500;
+}
+
+.toggleWrapper {
+  margin: 0 16px;
+}
+
+/* Стиль для переключателя (тумблера) */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 24px;
+}
+
+.switch .toggleInput {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #e5e7eb;
+  transition: 0.4s;
+  border-radius: 24px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+.toggleInput:checked + .slider {
+  background-color: #16a34a;
+}
+
+.toggleInput:focus + .slider {
+  box-shadow: 0 0 1px #16a34a;
+}
+
+.toggleInput:checked + .slider:before {
+  transform: translateX(24px);
+}
+
+.discount {
+  background-color: #a7f3d0;
+  color: #16a34a;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 12px;
+  margin-left: 8px;
+  white-space: nowrap;
+  border: 1px solid #16a34a;
+}
+
+.discountTextShort {
+  display: none;
+}
+
+.discountTextFull {
+  display: inline;
+}
+
+/* Для мобильных экранов */
+@media (max-width: 640px) {
+  .discountTextShort {
+    display: inline;
+  }
+  
+  .discountTextFull {
+    display: none;
+  }
+  
+  .billingOption {
+    padding: 6px 8px;
+    font-size: 14px;
+  }
+  
+  .discount {
+    padding: 1px 6px;
+    font-size: 10px;
+  }
+  
+  .billingPeriodWrapper {
+    padding: 6px 12px;
+  }
+  
+  .toggleWrapper {
+    margin: 0 8px;
+  }
+}
+
+.tariffGrid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 24px;
+  margin-bottom: 40px;
+  min-height: 450px; /* Обеспечивает минимальную высоту для отображения карточек */
+}
+
+.footer {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.infoIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 6px;
+  color: #6b7280;
+}
+
+/* Responsive grid adjustments */
+@media (min-width: 640px) {
+  .tariffGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .tariffGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 1440px) {
+  .container {
+    max-width: 1400px;
+  }
+  
+  .tariffGrid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+  }
+}
