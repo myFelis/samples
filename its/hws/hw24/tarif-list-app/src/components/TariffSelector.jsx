@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import TariffCard from './TariffCard';
+import AdditionalInfo from './AdditionalInfo'
 import { InfoIcon, Calendar, CalendarClock } from 'lucide-react';
 import styles from '../styles/TariffSelector.module.css';
 
@@ -112,21 +113,21 @@ const TariffSelector = () => {
       </div>
 
       <div className={styles.tariffGrid}>
-        {tariffPlans.map((tariff) => (
-          <TariffCard
-            key={tariff.id}
-            name={tariff.name}
-            speed={tariff.speed}
-            price={isYearly ? tariff.yearlyPrice : tariff.monthlyPrice}
-            period={isYearly ? 'год' : 'мес'}
-            description={tariff.description}
-            speedLevel={tariff.speedLevel}
-            isRecommended={tariff.isRecommended}
-            isSelected={selectedTariffId === tariff.id}
-            type={tariff.type}
-            onSelect={() => handleTariffSelect(tariff.id)}
-          />
-        ))}
+          {tariffPlans.map((tariff) => {
+            const tariffProps = {...tariff};
+            tariffProps.price = isYearly ? tariff.yearlyPrice : tariff.monthlyPrice;
+            tariffProps.period = isYearly ? 'год' : 'мес';
+            tariffProps.isSelected = selectedTariffId === tariff.id;
+            tariffProps.onSelect = () => handleTariffSelect(tariff.id);
+
+            return <TariffCard key={tariff.id} {...tariffProps} />;
+          })}
+        </div>
+
+      <div className={styles.tariffGrid}>
+          <p>
+               <AdditionalInfo />
+          </p>
       </div>
 
       <div className={styles.footer}>
